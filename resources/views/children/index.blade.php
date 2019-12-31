@@ -6,7 +6,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header"><h3>Manage Children </h3>
+                    <div class="float-left">
+                      <form action="{{url('filter_children')}}" method="get">
+                        @csrf
+                      <select onchange="callUrl()" name="class_filter" id="class_filter"class="form-control">
+                        <option value="0">All </option>
+                        <option value="1"> Class One </option>
+                        <option value="2"> Class Two </option>
+                        <option value="3"> Teens </option>
+                      </select>
+                      <input type="submit" class="btn btn-primary float-left" value="Filter" />
+                    </form>
+                    </div>
                     <div class="card-tools">
+                        
                         <a type="button" class="btn btn-primary" href="/children/create">
                          <i class="fas fa-user"> New Child</i>
                         </a>
@@ -66,5 +79,4 @@
         </div>
     </div>
 </div>
-
 @endsection

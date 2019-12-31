@@ -237,4 +237,19 @@ class ChildrenController extends Controller
 
             dd(ChildGuardian);
     }
+
+    public function filter_children(Request $request){
+        $class = $request->class_filter;
+        $children = DB::table('children')->where('church_class_id', $class)->paginate(20);
+        $school_class = SchoolClass::pluck('name', 'id');
+        $church_class = ChurchClass::pluck('name', 'id');
+       
+        $data = array(
+            'school_class' => $school_class,
+            'church_class' => $church_class,
+            'children' => $children
+        );
+        return view('children.index')->with($data);
+    }
+
 }

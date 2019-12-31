@@ -25,8 +25,11 @@ Route::middleware('auth:web')->group(function(){
     Route::resource('/users', 'UserController');
 
     Route::post('child/guardian', 'ChildrenController@AddGuardianToChild');
-    Route::get('child/guardian/{$child_id}/{$guardian_id}', 'ChildrenController@removeGuardian');
-
+    Route::get('child/guardian/{child_id}/{guardian_id}', 'ChildrenController@removeGuardian');
+    Route::get('childstat/charts', 'HomeController@charts');
+    Route::post('filter_children', 'ChildrenController@filter_children');
+    Route::get('change-password', 'UserController@show_password');
+    Route::post('change-password', 'UserController@change_password')->name('change.password');
     
     //  Logout
    Route::get('logout', 'HomeController@logout')->name('logout');

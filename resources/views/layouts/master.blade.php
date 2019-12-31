@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/adminlte.min.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/select2.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
 
    
 
@@ -116,8 +117,15 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/users" class="nav-link">
-                  <i class="fas fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-users"></i>
                   <p>Manage User</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{url('/change-password')}}" class="nav-link">
+                  <i class="nav-icon fa-user"></i>
+                  <p>Change Password</p>
                 </a>
               </li>
             
@@ -162,7 +170,7 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="">Admin Dashboard</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="">Admin Dashboard</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -173,10 +181,6 @@
 <script src="/js/app.js"></script>
 <script src="/js/adminlte.min.js"></script>
 <script src="/js/select2.full.min.js"></script>
-<script>
-    $(function () {
-      //Initialize Select2 Elements
-      $('.select2').select2()
-    </script>
+
 </body>
 </html>

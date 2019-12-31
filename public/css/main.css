@@ -151,7 +151,7 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 500px;
+  width: 400px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -207,7 +207,7 @@ iframe {
 
 /*---------------------------------------------*/
 input.input100 {
-  height: 68px;
+  height: 45px;
   padding: 0 25px 0 25px;
 }
 
