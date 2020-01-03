@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container">
+                 
+    <div class="row justify-content-center my-2">
+        <div class="col-md-8">
                 @if (session()->has('msg'))
                 <div class="alert alert-success my-2">
                     {{session()->get('msg')}}
                 </div> 
                 @endif
-                
-    <div class="row justify-content-center my-2">
-        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                         <h3>Edit Guardian Information</h3>
@@ -26,19 +26,20 @@
                                       
                                 </div>
                                 <div class="col-md-6">
-                                                <img src="{{url('/uploads/guardians').'/'.$guardian->photo}}" width="150px" />
+                                                <img src="{{url('/uploads/guardians').'/'.$guardian->photo}}" 
+                                                width="150px" class="img-circle elevation-2" />
                                 </div> 
                 </div>
                 <div class="card-body">
-                 {!! Form::open(['url' => 'guardians', 'files'=>'true']) !!}
+                 {!! Form::open(['url' => ['guardians', $guardian->id], 'files'=>'true', 'method'=> 'put']) !!}
                                 @csrf
                                 <div class="row">
                                         <div class="col-md-2">
                                                 <div class="form-group">
                                                         
                                                            {{Form::label('salutation', 'Salutation')}}
-                                                           {{Form::select('salutation', ['miss'=>'Miss', 'mr'=>'Mr', 'mrs'=>'Mrs'], $guardian ? $guardian->salutation : '', ['class'=>'form-control', 'required'])}}
-                                         
+                                                           {{Form::select('salutation', $salutations, $guardian ? $guardian->salutation : '', ['class'=>'form-control', 'required'])}}
+
                                                          @error('salutation')
                                                             <span style="color:red">{{ $message }}</span>
                                                          @enderror

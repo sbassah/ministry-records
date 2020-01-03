@@ -3,11 +3,17 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center my-2">
+  
         <div class="col-md-12">
+          @if (session()->has('msg'))
+          <div class="alert alert-success my-2">
+              {{session()->get('msg')}}
+          </div> 
+          @endif
             <div class="card">
                 <div class="card-header"><h3>Manage Children </h3>
                     <div class="float-left">
-                      <form action="{{url('filter_children')}}" method="get">
+                      <form action="{{url('filter_children')}}" method="post">
                         @csrf
                       <select onchange="callUrl()" name="class_filter" id="class_filter"class="form-control">
                         <option value="0">All </option>
@@ -54,16 +60,10 @@
                               
                             </td>
                             <td>
-                                
-                                 {{--  {!! Form::open(['route' => ['children.destroy', $child->id], 'method' => 'DELETE']) !!}  --}}
-                                 {!! link_to_route('children.edit', 'Edit', $child->id,  ['class' => 'btn btn-info btn-sm']) !!}
-                                 {!! link_to_route('children.destroy', 'Delete', $child->id,  ['class' => 'btn btn-danger btn-sm', 'method' => 'DELETE','onclick' => 'confirm("Are you sure you want to delete the product")']) !!}
-{{--                                  
-                                 {{Form::button('Delete', [ 'type'=> 'submit', 'class'=>'btn btn-danger btn-sm','onclick' => 'confirm("Are you sure you want to delete the product")'])}}
-                            
-                               
-                                {!! Form::close() !!}    --}}
-                    
+                                 {!! link_to_route('children.edit', 'Edit', $child->id,  ['class' => 'btn btn-info btn-sm']) !!}                               
+                                {{ Form::open([ 'method'  => 'delete', 'route' => [ 'children.destroy', $child->id ],'style' => 'float:right' ]) }}
+                                {{ Form::submit('Delete', ['class' => 'btn btn-sm btn-danger',  'onclick' => 'return confirm("Are you sure you want to delete this record?")']) }}
+                            {{ Form::close() }}
                             </td>
                           </tr>
                         @endforeach

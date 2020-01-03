@@ -40,12 +40,12 @@
                             <td>{{$church_class[$teacher->class_assigned_id]}}</td>
                           
                             <td>
-                              <a href="{{url('/teachers/'.$teacher->id.'/edit')}}">
-                                  <i class="fa fa-edit blue"></i>
-                                </a>
-                                 <a href="#">
-                                  <i class="fa fa-trash red"></i>
-                                </a>
+                       
+                                {!! link_to_route('teachers.edit', 'Edit', $teacher->id,  ['class' => 'btn btn-info btn-sm']) !!}                               
+                                {{ Form::open([ 'method'  => 'delete', 'route' => [ 'teachers.destroy', $teacher->id ],'style' => 'float:right' ]) }}
+                                {{ Form::submit('Delete', ['class' => 'btn btn-sm btn-danger',  
+                                'onclick' => 'return confirm("Are you sure you want to delete this record?")']) }}
+                            {{ Form::close() }}
                             </td>
                           </tr>
                         @endforeach

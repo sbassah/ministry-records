@@ -74,8 +74,6 @@ class ChildrenController extends Controller
              if($request->hasFile('photo')){
                 $photo = $request->photo;
                 $photo_name = $request->last_name.'_'.time().'.' . $request->photo->getClientOriginalExtension();
-               //dd($name.'.' . $request->photo->getClientOriginalExtension());
-               //dd( $photo_name );
                 $photo->move('uploads/children', $photo_name);
             }
 
@@ -171,10 +169,12 @@ class ChildrenController extends Controller
 
             //Upload the new image
 
-            $photo_name = $request->photo;
-            $photo_name->move('uploads/children', $photo_name->getClientOriginalName());
+            $photo = $request->photo;
+            $photo_name = $request->last_name.'_'.time().'.' . $request->photo->getClientOriginalExtension();
 
-            $child->photo = $request->photo->getClientOriginalName();
+            $photo->move('uploads/children', $photo_name);
+
+            $child->photo =  $photo_name;
         }
 
 
@@ -207,9 +207,33 @@ class ChildrenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        dd('Deleting');
+      //  dd($request);
+        $child = Child::find($id);
+     //   dd($child);
+        if($child){
+            
+            $first_name = $child->first_name;
+            DB::table('children_guardians')
+            ->where('child_id', '=', $id)
+            ->delete();
+
+          DB::table('children')
+            ->where('id', '=', $id)
+            ->delete();   
+            // Store Message in Flash
+            $request->session()->flash('msg', $first_name ."'s record has been deleted successfully");
+
+            //Redirect
+            return redirect ('children');
+        }
+
+        $request->session()->flash('msg',"Error!!!. No Record to Delete");
+
+        //Redirect
+        return redirect ('children');
+       
     }
 
     public function AddGuardianToChild(Request $request)
@@ -231,11 +255,21 @@ class ChildrenController extends Controller
     }
 
 
-    public function removeGuardian($child_id, $guardin_id ){
-        ChildGuardian::find(
-            ['child_id' => $child_id, 'guardian_id' => $guardian_id ]);
+    public function removeGuardian($child_id, $guardian_id ){
+     //  $childguardian = ChildGuardian::find(
+       //     ['child_id' => $child_id, 'guardian_id' => $guardian_id ]);
+            DB::table('children_guardians')
+            ->where('child_id', '=', $child_id)
+            ->where('guardian_id', '=',  $guardian_id)
+            ->delete();
 
-            dd(ChildGuardian);
+              // Store Message in Flash
+            //  $request->session()->flash('msg', "Guardian has been detached from child's record successfully");
+
+              //Redirect
+              return redirect ('children/'.$child_id.'/edit');
+
+          //  dd($childguardian);
     }
 
     public function filter_children(Request $request){

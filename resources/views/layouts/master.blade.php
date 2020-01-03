@@ -106,6 +106,14 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+          <a href="/attendance" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+              Attendance
+              </p>
+          </a>
+      </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>

@@ -31,6 +31,9 @@ Route::middleware('auth:web')->group(function(){
     Route::get('change-password', 'UserController@show_password');
     Route::post('change-password', 'UserController@change_password')->name('change.password');
     
+    Route::get('attendance', 'AttendanceController@index');
+    Route::post('attendance', 'AttendanceController@record');
+
     //  Logout
    Route::get('logout', 'HomeController@logout')->name('logout');
     

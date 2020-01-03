@@ -11,19 +11,25 @@
     <div class="row justify-content-center my-2">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Edit  Teacher
+                <div class="card-header"><h3>Edit  Teacher</h3>
 
                 </div>
                 <div class="row">
-                                <div class="col-md-6">
+                        <div class="col-md-6">
 
 
-                                        <h3>  {{$teacher->first_name}} {{$teacher->last_name }}</h3>
-                                      
-                                </div>
-                                <div class="col-md-6">
-                                                <img src="{{url('/uploads/teachers').'/'.$teacher->photo}}" width="150px" />
-                                </div> 
+                                <h4 style="
+                                        text-align: center;
+                                        vertical-align: middle;
+                                        margin: 50px;
+                                    "
+                                    > {{$teacher->first_name}} {{$teacher->last_name }}</h4>
+                                
+                        </div>
+                        <div class="col-md-6">
+                                        <img src="{{url('/uploads/teachers').'/'.$teacher->photo}}" width="150px" 
+                                        class="img-circle elevation-2"/>
+                        </div> 
                 </div>
                 <div class="card-body table-responsive">
                  {!! Form::open(['url' => ['teachers' , $teacher->id], 'files'=>'true', 'method' => 'put']) !!}

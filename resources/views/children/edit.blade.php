@@ -183,7 +183,8 @@
                                                 </td>
                                                 <td> 
                                                 <a href="{{url('/child/guardian/'.$guardian->pivot->child_id.'/'.
-                                                        $guardian->pivot->guardian_id)}}">
+                                                        $guardian->pivot->guardian_id)}}"
+                                                        onclick="return confirm('Are you sure, you want to delete it?')">
                                                         <i class="fa fa-trash red"></i>
                                                 </a>
                                                 </td>

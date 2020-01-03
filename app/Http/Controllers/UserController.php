@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\DB;
+
 class UserController extends Controller
 {
     /**
@@ -80,7 +82,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $data = array(
+            'user' => $user,
+        );
+        return view('users.edit')->with($data);
     }
 
     /**
@@ -91,8 +97,30 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {        $user = User::find($id);
+
+        $this->validate($request, [
+            'name' => 'required |string | max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'password' => 'sometimes | string | min:8 | confirmed',
+        ]);
+       // $user = User::find($id);
+        $user->update($request->all());
+        $request->session()->flash('msg', "User account has been Updated successfully");
+
+        //Redirect
+        return redirect ('users');
+            if($user){
+                if($request->password == ''){
+                    dd('null');
+                }
+                $teacher->update([
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password']),
+                   ]);
+            }
+      
     }
 
     /**
@@ -101,9 +129,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+      //  dd($request);
+        $user = User::find($id);
+     //   dd($child);
+        if($user){
+            
+          DB::table('users')
+            ->where('id', '=', $id)
+            ->delete();   
+            // Store Message in Flash
+            $request->session()->flash('msg', "User account has been deleted successfully");
+
+            //Redirect
+            return redirect ('users');
+        }
+
+        $request->session()->flash('msg',"Error!!!. No Record to Delete");
+
+        //Redirect
+        return redirect ('users');
+       
     }
 
     public function show_password(){

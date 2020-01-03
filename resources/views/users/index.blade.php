@@ -36,12 +36,11 @@
                             <td>{{$user->email}}</td>
                           
                             <td>
-                              <a href="{{url('/users/'.$user->id.'/edit')}}">
-                                  <i class="fa fa-edit blue"></i>
-                                </a>
-                                 <a href="#">
-                                  <i class="fa fa-trash red"></i>
-                                </a>
+                              {!! link_to_route('users.edit', 'Edit', $user->id,  ['class' => 'btn btn-info btn-sm']) !!}                               
+                                {{ Form::open([ 'method'  => 'delete', 'route' => [ 'users.destroy', $user->id ],'style' => 'float:right' ]) }}
+                                {{ Form::submit('Delete', ['class' => 'btn btn-sm btn-danger',  
+                                'onclick' => 'return confirm("Are you sure you want to delete this user?")']) }}
+                            {{ Form::close() }}
                             </td>
                           </tr>
                         @endforeach

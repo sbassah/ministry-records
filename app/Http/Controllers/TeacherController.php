@@ -5,6 +5,7 @@ use App\Teacher;
 use App\Salutation;
 use App\ChurchClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TeacherController extends Controller
 {
@@ -68,9 +69,8 @@ class TeacherController extends Controller
 
              if($request->hasFile('photo')){
                 $photo = $request->photo;
-                $photo->move('uploads/teachers', $photo->getClientOriginalName());
-                $photo_name = $photo->getClientOriginalName();
-                
+                $photo_name = $request->last_name.'_'.time().'.' . $request->photo->getClientOriginalExtension();
+                $photo->move('uploads/teachers', $photo_name);
             }
 
 
@@ -85,7 +85,7 @@ class TeacherController extends Controller
            ]);
 
            //Sesion Messege
-       $request->session()->flash('msg', 'Teacher Record has been added Successfully');
+       $request->session()->flash('msg', $request['first_name']."'s Teacher Record has been added Successfully");
 
        //Redirect
        return redirect('teachers/create');
@@ -153,11 +153,11 @@ class TeacherController extends Controller
               }
   
               //Upload the new image
-  
-              $photo_name = $request->photo;
-              $photo_name->move('uploads/teachers', $photo_name->getClientOriginalName());
-  
-              $teacher->photo = $request->photo->getClientOriginalName();
+
+              $photo = $request->photo;
+              $photo_name = $request->last_name.'_'.time().'.' . $request->photo->getClientOriginalExtension();
+              $photo->move('uploads/teachers', $photo_name);
+              $teacher->photo =  $photo_name;
           }
 
         
@@ -184,8 +184,29 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+      //  dd($request);
+        $teacher = Teacher::find($id);
+     //   dd($child);
+        if($teacher){
+            
+            $first_name = $teacher->first_name;
+
+          DB::table('teachers')
+            ->where('id', '=', $id)
+            ->delete();   
+            // Store Message in Flash
+            $request->session()->flash('msg', $first_name ."'s record has been deleted successfully");
+
+            //Redirect
+            return redirect ('teachers');
+        }
+
+        $request->session()->flash('msg',"Error!!!. No Record to Delete");
+
+        //Redirect
+        return redirect ('teachers');
+       
     }
 }
