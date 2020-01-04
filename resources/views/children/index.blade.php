@@ -11,19 +11,61 @@
           </div> 
           @endif
             <div class="card">
+              <div class="card-body p-2">
+                <div class="row">
+                  <div class="col-md-3">
+                    <form action="{{url('filter-children')}}" method="post">
+                      @csrf
+                      <div class="form-group">
+                        <label for="">Select Class</label>
+                        <select name="class_filter" id="class_filter"class="form-control">
+                          <option value="0">All </option>
+                          <option value="1"> Class One </option>
+                          <option value="2"> Class Two </option>
+                          <option value="3"> Teens </option>
+                        </select>
+                      </div>
+                      <input type="submit" class="btn btn-primary float-left" value="Filter" />
+                </form>
+              </div>
+              <div class="col-md-8 offset-md-1">
+                <form action="{{url('search-children')}}" method="post">
+                  @csrf
+                  <div class="row">
+                    <div class="col-md-4 float-right my-4">
+                     <strong style="float: right;"> Search Child: </strong>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="search" name="first_name" id="" class="form-control"
+                         placeholder="" aria-describedby="helpId">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="last">Last Name</label>
+                        <input type="search" name="last_name" id="" class="form-control"
+                         placeholder="" aria-describedby="helpId">
+                      </div>
+                    </div>
+  
+                  </div>
+                  <input type="submit" class="btn btn-primary float-right" value="Search" />
+
+                </form>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+            <div class="card">
                 <div class="card-header"><h3>Manage Children </h3>
                     <div class="float-left">
-                      <form action="{{url('filter_children')}}" method="post">
-                        @csrf
-                      <select onchange="callUrl()" name="class_filter" id="class_filter"class="form-control">
-                        <option value="0">All </option>
-                        <option value="1"> Class One </option>
-                        <option value="2"> Class Two </option>
-                        <option value="3"> Teens </option>
-                      </select>
-                      <input type="submit" class="btn btn-primary float-left" value="Filter" />
-                    </form>
+                    
+                      
                     </div>
+                   
                     <div class="card-tools">
                         
                         <a type="button" class="btn btn-primary" href="/children/create">

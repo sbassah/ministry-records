@@ -27,12 +27,22 @@ Route::middleware('auth:web')->group(function(){
     Route::post('child/guardian', 'ChildrenController@AddGuardianToChild');
     Route::get('child/guardian/{child_id}/{guardian_id}', 'ChildrenController@removeGuardian');
     Route::get('childstat/charts', 'HomeController@charts');
-    Route::post('filter_children', 'ChildrenController@filter_children');
+    Route::post('filter-children', 'ChildrenController@filter_children');
+    Route::post('search-children', 'ChildrenController@search_child');
     Route::get('change-password', 'UserController@show_password');
     Route::post('change-password', 'UserController@change_password')->name('change.password');
     
     Route::get('attendance', 'AttendanceController@index');
     Route::post('attendance', 'AttendanceController@record');
+    Route::get('reports', 'ReportsController@index');
+
+    Route::prefix('reports')->group(function(){
+        Route::get('/', 'ReportsController@index');
+        Route::post('/by-class', 'ReportsController@getByClass');
+
+    });
+
+
 
     //  Logout
    Route::get('logout', 'HomeController@logout')->name('logout');

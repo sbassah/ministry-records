@@ -10,7 +10,7 @@
     <div class="row justify-content-center my-2">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Manage Guardians
+                <div class="card-header"><h3>Manage Guardians</h3>
                     <div class="card-tools">
                         <a type="button" class="btn btn-primary" href="/guardians/create">
                          <i class="fas fa-user"> New Guardian</i>

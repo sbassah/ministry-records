@@ -10,7 +10,7 @@
     <div class="row justify-content-center my-2">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Manage Users
+                <div class="card-header"><h3> Manage Users </h3>
                     <div class="card-tools">
                         <a type="button" class="btn btn-primary" href="/users/create">
                          <i class="fas fa-user"> New User</i>
