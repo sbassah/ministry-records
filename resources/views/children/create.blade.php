@@ -11,7 +11,7 @@
     <div class="row justify-content-center my-2">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Add a Child
+                <div class="card-header"><h3>Add a Child </h3>
 
                 </div>
                 <div class="card-body table-responsive">
@@ -83,7 +83,7 @@
                                      <div class="col-md-6">
                                                 <div class="form-group">
                                                         {{Form::label('name_of_school', 'Name of School')}}
-                                                       {{ Form::text('name_of_school','', ['class'=>'form-control', 'required'])}}
+                                                       {{ Form::text('name_of_school','', ['class'=>'form-control'])}}
                                                    
                                                          @error('name_of_school')
                                                          <span style="color:red">{{ $message }}</span>

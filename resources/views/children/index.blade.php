@@ -88,11 +88,12 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <?php $k =0; ?>
                         @foreach ($children as $child)
                         <tr>
-                            <td>{{$child->id}}</td>
-                            <td>{{$child->first_name}} {{$child->last_name}}</td>
-                            <td>{{$child->gender}}</td>
+                            <td>{{$k +=1}}</td>
+                            <td>{{ucfirst($child->first_name)}} {{ucfirst($child->last_name)}}</td>
+                            <td>{{ucfirst($child->gender)}}</td>
                             
                            
                             <td>{{$child->date_of_birth}}</td>

@@ -28,7 +28,7 @@
       
     </ul>
 
-    <!-- SEARCH FORM -->
+    {{-- <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -38,7 +38,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
    
   </nav>
@@ -47,7 +47,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="/dashboard" class="brand-link">
       <img src="/images/shield.png" alt="Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">CTM Ministry</span>
@@ -84,7 +84,7 @@
         </li>
         <li class="nav-item">
             <a href="/children" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon fas fa-child"></i>
                 <p>
                 Children
                 </p>
@@ -92,7 +92,7 @@
         </li>
         <li class="nav-item">
             <a href="/guardians" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon fas fa-user-friends"></i>
                 <p>
                 Guardians
                 </p>
@@ -100,7 +100,7 @@
         </li>
         <li class="nav-item">
             <a href="/teachers" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
                 <p>
                 Teachers
                 </p>
@@ -108,7 +108,7 @@
         </li>
         <li class="nav-item">
           <a href="/attendance" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
               Attendance
               </p>
@@ -116,7 +116,7 @@
       </li>
       <li class="nav-item">
         <a href="/reports" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
+            <i class="nav-icon fas fa-chart-pie"></i>
             <p>
             Reports
             </p>
@@ -130,21 +130,42 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+          
             <ul class="nav nav-treeview">
+              @if (Auth::user()->type =='admin')
               <li class="nav-item">
                 <a href="/users" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
+                  <i class="nav-icon fas fa-user"></i>
                   <p>Manage User</p>
                 </a>
               </li>
-
+              <li class="nav-item">
+                <a href="/groups" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>Manage Groups</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{url('/change-password')}}" class="nav-link">
-                  <i class="nav-icon fa-user"></i>
+                  <i class="nav-icon fas fa-unlock-alt"></i>
                   <p>Change Password</p>
                 </a>
               </li>
+
+
+            @else
+                          
+              <li class="nav-item">
+                <a href="{{url('/change-password')}}" class="nav-link">
+                  <i class="nav-icon fas fa-unlock-alt"></i>
+                  <p>Change Password</p>
+                </a>
+              </li>
+
+            @endif
+          
             
+
             </ul>
           </li>
           <li class="nav-item">
@@ -197,6 +218,11 @@
 <script src="/js/app.js"></script>
 <script src="/js/adminlte.min.js"></script>
 <script src="/js/select2.full.min.js"></script>
-
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  })
+  </script>
 </body>
 </html>

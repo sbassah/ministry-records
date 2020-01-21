@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Samuel Bassah',
             'email' => 'sbassah@gmail.com',
             'password' => bcrypt('adomes12'),
+            'type' => 'admin',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             ],

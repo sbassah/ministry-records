@@ -96,7 +96,7 @@
                                      <div class="col-md-6">
                                             <div class="form-group">
                                                     {{Form::label('name_of_school', 'Name of School')}}
-                                                    {{ Form::text('name_of_school',$child_guardians[0] ?$child_guardians[0]->school_name :'', ['class'=>'form-control', 'required'])}}
+                                                    {{ Form::text('name_of_school',$child_guardians[0] ?$child_guardians[0]->school_name :'', ['class'=>'form-control'])}}
                                                         
                                                      @error('name_of_school')
                                                      <span style="color:red">{{ $message }}</span>
@@ -116,7 +116,7 @@
                                                         <div class="form-group">
                                                              
                                                                 {{Form::label('school_class', 'Class in School')}}
-                                                                {{Form::select('school_class',$school_class , $child_guardians[0] ? $child_guardians[0]->school_class_id : '', ['class'=>'form-control', 'required'])}}
+                                                                {{Form::select('school_class',$school_class , $child_guardians[0] ? $child_guardians[0]->school_class_id : '', ['class'=>'form-control'])}}
                                                 
                                                                 @error('school_class')
                                                                 <span style="color:red">{{ $message }}</span>
@@ -204,7 +204,8 @@
                                                                 <input type="hidden" name="child_id" value="{{$child_guardians[0]->id}}" />
                                                         {{Form::label('guardian_name', 'Name of Guardian')}}
                                                         {{Form::select('guardian',$guardians ,
-                                                                                '', ['class'=>'form-control select2', 'required'])}}
+                                                                                '', ['class'=>'form-control select2', 'required',
+                                                                                'style'=>'width: 100%'])}}
                                                 
                                                 </div>
                                         </div>

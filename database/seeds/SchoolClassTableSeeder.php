@@ -13,6 +13,11 @@ class SchoolClassTableSeeder extends Seeder
     {
         DB::table('school_classes')->insert([
             [  
+                'name' => '',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [  
                 'name' => 'Day Care',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),

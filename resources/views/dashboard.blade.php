@@ -153,6 +153,29 @@
                         </div>
                        
                       </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <!-- BAR CHART -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Bar Chart</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="barChart" style="height:230px; min-height:230px"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+                        </div>
+                      </div>
 
                  </div>
             
@@ -160,4 +183,146 @@
         </div>
     </div>
 </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="https://adminlte.io/themes/dev/AdminLTE/plugins/chart.js/Chart.min.js">
+  </script>
+<script>
+  $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+  
+    //--------------
+    //- AREA CHART -
+    //--------------
+/*    $.get("getcharts", function(data, status){
+           $.each(data, function() {
+            $.each(this, function(k, v) {
+              console.log(k +'= '+ v);
+            });
+          });
+    })
+**/
+    var areaChartData = {
+      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+      'August', 'September','October', 'November','December'],
+      datasets: [
+        {
+          label               : 'Digital Goods',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : [28, 48, 40, 19, 86, 27, 90]
+        },
+        {
+          label               : 'Electronics',
+          backgroundColor     : 'rgba(210, 214, 222, 1)',
+          borderColor         : 'rgba(210, 214, 222, 1)',
+          pointRadius         : false,
+          pointColor          : 'rgba(210, 214, 222, 1)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data                : [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+          label               : 'Digital Goods',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : [28, 48, 40, 19, 86, 27, 90]
+        },
+        {
+          label               : 'Electronics',
+          backgroundColor     : 'rgba(210, 214, 222, 1)',
+          borderColor         : 'rgba(210, 214, 222, 1)',
+          pointRadius         : false,
+          pointColor          : 'rgba(210, 214, 222, 1)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data                : [65, 59, 80, 81, 56, 55, 40]
+        },
+      ]
+    }
+  
+  
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutData        = {
+      labels: [
+          'Chrome', 
+          'IE',
+          'FireFox', 
+          'Safari', 
+          'Opera', 
+          'Navigator', 
+      ],
+      datasets: [
+        {
+          data: [700,500,400,600,300,100],
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        }
+      ]
+    }
+  
+    //-------------
+    //- PIE CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var pieData        = donutData;
+    var pieOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    var pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions      
+    })
+  
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = jQuery.extend(true, {}, areaChartData)
+    var temp0 = areaChartData.datasets[0]
+    var temp1 = areaChartData.datasets[1]
+    barChartData.datasets[0] = temp1
+    barChartData.datasets[1] = temp0
+  
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+  
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar', 
+      data: barChartData,
+      options: barChartOptions
+    })
+  
+  })
+  </script>
+
+
 @endsection

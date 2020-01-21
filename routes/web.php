@@ -19,10 +19,13 @@ Auth::routes();
 Route::middleware('auth:web')->group(function(){
 
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::get('getcharts', 'HomeController@getCharts');
     Route::resource('/children', 'ChildrenController');
     Route::resource('/teachers', 'TeacherController');
     Route::resource('/guardians', 'GuardianController');
     Route::resource('/users', 'UserController');
+    Route::resource('/groups', 'GroupController');
+
 
     Route::post('child/guardian', 'ChildrenController@AddGuardianToChild');
     Route::get('child/guardian/{child_id}/{guardian_id}', 'ChildrenController@removeGuardian');
@@ -39,6 +42,8 @@ Route::middleware('auth:web')->group(function(){
     Route::prefix('reports')->group(function(){
         Route::get('/', 'ReportsController@index');
         Route::post('/by-class', 'ReportsController@getByClass');
+        Route::post('/by-age', 'ReportsController@getByAgeGroup');
+        Route::post('/by-month', 'ReportsController@getAttendanceByMonth');
 
     });
 

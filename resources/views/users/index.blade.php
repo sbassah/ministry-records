@@ -25,16 +25,20 @@
                           <th>ID</th>
                           <th>Name</th>
                           <th>Email Address</th>
+                          <th>Type </th>
+
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <?php $k =0; ?>
                         @foreach ($users as $user)
                         <tr>
-                            <td>{{$user->id}}</td>
+                            <td>{{$k +=1}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                          
+                            <td> {{ucfirst($user->type)}}</td>
+
                             <td>
                               {!! link_to_route('users.edit', 'Edit', $user->id,  ['class' => 'btn btn-info btn-sm']) !!}                               
                                 {{ Form::open([ 'method'  => 'delete', 'route' => [ 'users.destroy', $user->id ],'style' => 'float:right' ]) }}

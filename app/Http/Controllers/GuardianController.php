@@ -110,7 +110,6 @@ class GuardianController extends Controller
         $child_guardians = Guardian::where('id', '=', $id)
         ->with('children')
         ->get();
-       // dd($child_guardians);
         $guardian = Guardian::find($id);
        $salutations = Salutation::pluck('name', 'name');
        $children = Child::pluck('first_name', 'id');

@@ -4,11 +4,13 @@
 <div class="container">
     <div class="row justify-content-center my-2">
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             @if (session()->has('msg'))
             <div class="alert alert-success my-2">
                 {{session()->get('msg')}}
             </div> 
+        
+            @endif
             @if ($errors->any())
                                 
             <div class="alert alert-danger">
@@ -19,37 +21,20 @@
                 </ul>
             </div>
 
-        @endif
             @endif
             <div class="card">
                 <div class="card-header">
-                    <h3> Record Attendance</h3>
+                    <h3> New Group</h3>
                 </div>
    
                 <div class="card-body">
-                 <form action="{{url('attendance')}}" method="post">
+                 <form action="{{url('groups')}}" method="post">
                      @csrf
                         <div class="card-body">
+                        
                           <div class="form-group">
-                            <label for="sunday_date">Sunday Date</label>
-                            <input type="date" name="sunday_date" class="form-control" required/>
-                          </div>
-                          <div class="form-group">
-                            <label for="group">Select Group</label>
-                            <select class="form-control" name="group">
-                                @foreach ($classes as $key => $value)
-                                <option value="{{$key}}"> {{$value}}</option>
-                                @endforeach
-                                <option value="0">Teachers</option>
-                            </select> 
-                          </div>
-                          <div class="form-group">
-                            <label for="girls">Girls/Female</label>
-                            <input type="number" name="girls" class="form-control" required/>
-                          </div>
-                          <div class="form-group">
-                            <label for="boys">Boys/Male</label>
-                            <input type="number" name="boys" class="form-control" required/>
+                            <label for="group_name">Group Name </label>
+                            <input type="text" name="group_name" class="form-control" required/>
                           </div>
                           <div class="form-group">
                             <label for="comment">Comment</label>
@@ -60,7 +45,7 @@
                         <!-- /.card-body -->
         
                         <div class="card-footer">
-                          <button type="submit" class="btn btn-primary">Record</button>
+                          <button type="submit" class="btn btn-primary">Create Group</button>
                         </div>
                       </form>
                 </div>
@@ -69,4 +54,5 @@
 
     </div>
 </div>
+
 @endsection

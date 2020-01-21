@@ -46,6 +46,7 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required |string | max:255',
+            'type' => 'required| string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required | string | min:8 | confirmed',
         ]);
@@ -53,6 +54,7 @@ class UserController extends Controller
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
+            'type' => $request['type'],
             'password' => Hash::make($request['password']),
            ]);
 
@@ -101,25 +103,26 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required |string | max:255',
+            'type' => 'required| string',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'sometimes | string | min:8 | confirmed',
         ]);
-       // $user = User::find($id);
-        $user->update($request->all());
-        $request->session()->flash('msg', "User account has been Updated successfully");
-
-        //Redirect
-        return redirect ('users');
+       
             if($user){
+                $password = Hash::make($request['password']);
                 if($request->password == ''){
-                    dd('null');
+                  $password = $user->password;
                 }
-                $teacher->update([
+                $user->update([
                     'name' => $request['name'],
                     'email' => $request['email'],
-                    'password' => Hash::make($request['password']),
+                    'type' => $request['type'],
+                    'password' => $password,
                    ]);
             }
+            $request->session()->flash('msg', "User account has been Updated successfully");
+            //Redirect
+            return redirect ('users');
       
     }
 
@@ -131,9 +134,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-      //  dd($request);
         $user = User::find($id);
-     //   dd($child);
         if($user){
             
           DB::table('users')

@@ -31,10 +31,11 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <?php $k =0; ?>
                         @foreach ($guardians as $guardian)
                         <tr>
-                            <td>{{$guardian->id}}</td>
-                            <td>{{$guardian->salutation}} {{$guardian->first_name}} {{$guardian->last_name}}</td>
+                            <td>{{$k +=1}}</td>
+                            <td>{{$guardian->salutation}} {{ucfirst($guardian->first_name)}} {{($guardian->last_name)}}</td>
                             <td>{{$guardian->phone_no}}</td>
                             <td>{{$guardian->is_member == 1? 'Yes' : 'No'}}</td>
                             <td> <img src="{{url('/uploads/guardians').'/'.$guardian->photo}}" 

@@ -19,9 +19,11 @@
                         <div class="form-group">
                           <label for="">Select a Class</label>
                           <select name="group" id="group" class="form-control">
+                           
                             @foreach ($classes as $key => $value)
                                 <option value="{{$key}}"> {{$value}}</option>
-                                @endforeach
+                            @endforeach
+                            <option value="0"> All</option>
                         </select>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Get Report" />
@@ -38,19 +40,20 @@
                 </div>
    
                 <div class="card-body">
-                    <form action="" method="get">
+                    <form action="{{url('reports/by-age')}}" method="post">
+                        @csrf
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="age_start">From</label>
-                                <input type="number" name="age_start" class="form-control" />
+                                <label for="age_start">From (Age)</label>
+                                <input type="number" name="age_start" min="0" max="99" class="form-control" required/>
       
                               </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="age_end">To</label>
-                                <input type="number" name="age_end" class="form-control" />
+                                <label for="age_end">To (Age)</label>
+                                <input type="number" name="age_end" min="1" max="100" class="form-control" required />
                             </div>
                         </div>
                         <div class="col-md-4 my-4">
@@ -71,7 +74,8 @@
                 </div>
    
                 <div class="card-body">
-                    <form action="" method="get">
+                    <form action="{{url('reports/by-month')}}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -126,8 +130,8 @@
                 </div>
    
                 <div class="card-body">
-                    <form action="" method="get">
-                        <input type="week" name="day" class="form-control" />
+                    <form action="{{url('/report/by-month')}}" method="post">
+                        <input type="date" name="day" class="form-control" />
 
                         <input type="submit" name="submit" class="btn btn-primary" value="Get Report" />
                     </form>

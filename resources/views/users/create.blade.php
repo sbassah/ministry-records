@@ -74,7 +74,17 @@
                                                      @enderror
                                                 </div>
                                         </div>
-                                     
+                                        
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                    {{Form::label('type', 'Type')}}
+                                                    {{Form::select('type', [''=>'Select User Type', 'teacher'=>'Teacher', 'admin'=>'Administrator'], '', ['class'=>'form-control', 'required'])}}
+                                                    
+                                                    @error('type')
+                                                    <span style="color:red">{{ $message }}</span>
+                                                 @enderror
+                                            </div>
+                                    </div>
                    
                                     </div>
                                     <button type="submit"  class="btn btn-primary">Create New User</button>

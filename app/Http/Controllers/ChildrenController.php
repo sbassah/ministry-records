@@ -17,7 +17,7 @@ class ChildrenController extends Controller
      */
     public function index()
     {
-        $children = Child::paginate(5);
+        $children = Child::paginate(10);
         $school_class = SchoolClass::pluck('name', 'id');
         $church_class = ChurchClass::pluck('name', 'id');
        
@@ -40,7 +40,7 @@ class ChildrenController extends Controller
       //  $children = Child::pluck('[first_name, last_Name]', 'id');
       //  Child::get(['first_name', 'last_Name', 'id'])->pluck('columns', 'id');
 
-       // dd($children);
+       // dd($children);ddb5454/
         $church_class = ChurchClass::pluck('name', 'id');
         $data = array(
             'school_class' => $school_class,
@@ -116,12 +116,10 @@ class ChildrenController extends Controller
      */
     public function edit($id)
     {	
-       // $child = Child::find($id);
-      //  $child_guardians = ChildGuardian::where('child_id',$id)->get();
         $child_guardians = Child::where('id', '=', $id)
             ->with('guardians')
             ->get();
-       //  dd($child_guardians[0]->guardians[0]->pivot->relationship);
+       
         $school_class = SchoolClass::pluck('name', 'id');
         $church_class = ChurchClass::pluck('name', 'id');
         $guardians = Guardian::pluck('full_name', 'id');
@@ -256,20 +254,13 @@ class ChildrenController extends Controller
 
 
     public function removeGuardian($child_id, $guardian_id ){
-     //  $childguardian = ChildGuardian::find(
-       //     ['child_id' => $child_id, 'guardian_id' => $guardian_id ]);
             DB::table('children_guardians')
             ->where('child_id', '=', $child_id)
             ->where('guardian_id', '=',  $guardian_id)
             ->delete();
 
-              // Store Message in Flash
-            //  $request->session()->flash('msg', "Guardian has been detached from child's record successfully");
-
               //Redirect
               return redirect ('children/'.$child_id.'/edit');
-
-          //  dd($childguardian);
     }
 
     public function filter_children(Request $request){

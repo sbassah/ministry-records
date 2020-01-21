@@ -16,6 +16,7 @@ class CreateChurchClassTable extends Migration
         Schema::create('church_classes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
